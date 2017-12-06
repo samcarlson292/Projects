@@ -1,0 +1,27 @@
+Project Name: 
+
+Goal: 
+Find and visualize trends in Spotify music information over time
+Find relationships between trends in Spotify and trends in twitter
+Find the correctness of our estimator vs. basic estimator
+Use relation between Spotify and Twitter to predict which songs are going to be popular
+Show how this could be used in the future
+
+Tools Used:
+Django
+Requests
+Spotipy
+Twitter API
+Matplotlib
+MapReduce
+Postgres DB
+
+Steps:
+1.  Catch up to speed
+2.  Divide up tasks between everyone
+3.  Begin work
+
+Mitch: Spotify Data + Analysis
+Erin: Twitter Data + Analysis
+Sam: Merge trends + Plan Prediction
+Cam: Django + Integration

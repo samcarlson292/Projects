@@ -1,0 +1,37 @@
+<div class="container">
+    <div align="center">
+        <h2>TuneTrend Search</h2>
+
+        <form class="form-inline" action="" method="GET">
+            Search term:<br>
+            {{ ArtistsProperSearchForm}}
+            <button class="typeahead-button" type="submit" onclick=getTyped()>Search</button>
+            <input type="text" name="artist_name" placeholder="Type an Artist or Song...">
+            <select id="search_type">
+                <option value="artist">Artist</option>
+                <option value="song">Song</option>
+            </select>
+            </fieldset>
+        </form>
+    </div>
+    {%if object_list %}
+    <div id="results" align = center>
+        Search Results: <br>
+        <table class="table table-bordered table-condensed">
+            <tr>
+                <th>Name</th>
+                <th>Popularity</th>
+                <th>Collection Date</th>      
+            </tr>
+            {% for object in object_list %}
+            <tr>
+                <td>{{object.artist_name}}</td>
+                <td>{{object.artist_popularity}}</td>
+                <td>{{object.collection_time}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {%endif%}
+
+</div>

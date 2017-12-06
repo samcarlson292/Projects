@@ -1,0 +1,19 @@
+<div class="container">
+
+    <h2>artist_name</h2>
+
+    <table class="table table-bordered table-condensed">
+        <tr>
+            <th>Name</th>      
+        </tr>
+        {% for object in object_list %}
+        <tr>
+            <td>{{object.artist_name}}</td>
+            <td> </td>
+            <td>{{object.artist_popularity}}</td>
+            <td> </td>
+            <td>{{object.collection_time}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>

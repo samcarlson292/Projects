@@ -1,0 +1,87 @@
+Project: TuneTrend: Forecasting Popular Music
+
+Team Members: Erin Hall, Cameron Ridgewell, Sam Carlson, Mitch Masia
+
+Problem Overview & Hypotheses:
+	The goal of this project is to be able to collect and parse data from Twitter and music-streaming
+ service Spotify in order to predict "popularity" of songs and artists in the future.  We believe that we
+ can use Twitter as a leading indicator of eventual song popularity, and if we can track the occurrences 
+of artist and song references on this medium, we will be able to match this information to popularity
+trends we observe in Spotify data.  This, in conjunction with real analysis on popularity trends of 
+actual Spotify tracks should allow us to predict which songs are going to "blow up".
+
+Data Sets:
+	Spotify:
+		=> Begin with a list of Billboard's Top 100 Artists.
+		=> Find all of their "related" artists on Spotify.
+			=> Spotify groups artists based on genre, user preferences, and adjacent search.
+		=> Find [15] songs from each of these related artists and compile a large list of songs.
+		=> Once per day, query Spotify for the data on each artist and song listed above.
+
+		=> We maintain a database of this information comprised of several relations.
+
+			Relation: "full_artists"
+			Fields:
+				artistName
+				spotifyIdentifier
+				artistID
+				artistPopularity
+				artistGenre
+				collectionTime
+
+			Relation: "songs_proper"
+			Fields:
+				artist
+				artistID
+				songName
+				spotifyIdentifier
+				songID
+				songGenre
+				collectionTime
+
+	Twitter:
+		=> Query the songIDs from the "songs_proper" relation
+		=> Search for each song in a multithreaded manner and record the count
+			=> Search the tweet archive over the past 24 hours every day
+			=> OR Stream the tweets and get a live count
+
+			Relation: "twitter_artists"
+			Fields:
+				artistID (used to join w/ 'full_artists' & 'songs_proper')
+				numRef (Number of references to the artist in past 24 hours)
+
+			Relation: "twitter_songs"
+				songID (used to join w/ 'songs_proper')
+				numRef (Number of references to the songs in the past 24 hours)
+
+Tools Used:
+	=> Postgres DB as primary datastore
+	=> MapReduce to analyze statistics on individual songs and artists with respect to time.
+	=> Spotipy -- Python wrapper around Spotify Web API for data acquisition.
+	=> Twitter -- Twitter API to retrieve tweets
+	=> Django for developing a Web App to represent our dataset and correlations we find.
+	=> #########POSSIBLY MACHINE LEARNING??##########
+
+Related Works:
+	We do not know of other groups using Twitter in conjunction with Spotify to predict song
+popularity; however, there is some work done on parsing for popular songs solely on Twitter.  A nice
+example of thses applications is "Hype Machine" seen here: http://hypem.com/twitter/popular.
+
+Judging Success:
+	Our goal here is to find the relationship between Twitter references and song popularity to see
+if there Twitter can be used as a leading indicator to enhance the performance of a simple song
+popularity prediction algorithm.  To test the results of our experiment, we will first build a simple
+popularity predictor using Spotify alone.  This will solely use the derivative of song popularity
+with respect to time to identify upcoming songs.  Our more complex system will use this base information
+in conjuction with info on Twitter song/artist references to see if it can better predict which songs
+will be popular, when they will become popular, when they will fall out of popularity, and if we can
+identify potentially popular songs not found from Spotify alone.  Depending on the degree of success in 
+using Twitter in conjunction with Spotify, we will judge the success of our project.
+	100% Success:   Identify songs base prediction did not.
+			Identify songs sooner than base prediction does.
+			Pinpoint when songs will reach the popularity threshhold.
+
+	75% Success:    Identify songs base prediction did not.
+			Identify songs sooner than base prediction does.
+
+	50% Success:    Identify songs sooner than base predicition does. 

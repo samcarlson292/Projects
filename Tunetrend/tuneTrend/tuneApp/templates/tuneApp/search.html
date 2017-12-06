@@ -1,0 +1,66 @@
+<div class="container">
+    <div align="center">
+        <h2>TuneTrend Search</h2>
+
+        <form class="form-inline" action="" method="GET">
+            Search term:<br>
+            {{ ArtistsProperSearchForm}}
+            <button class="typeahead-button" type="submit">Search</button>
+            <input type="text" name="search_term" placeholder="Type an Artist or Song...">
+            <select name="search_type">
+                <option value="artist">Artist</option>
+                <option value="song">Song</option>
+            </select>
+            </fieldset>
+        </form>
+        <br>
+        
+    </div>
+
+    {%if object_list %}
+    <div align = left>
+        <h3>Search Results:</h3> 
+    </div>
+        {%if data_type == 'artist'%}
+            <div id="results" align = center>
+                <table class="table table-bordered table-condensed">
+                    <tr>
+                        <th>Name</th>
+                        <th>Popularity</th>
+                        <th>Collection Date</th>      
+                    </tr>
+                    {% for object in object_list %}
+                    <tr>
+                        <td>{{object.artist_name}}</td>
+                        <td>{{object.artist_popularity}}</td>
+                        <td>{{object.collection_time}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {%elif data_type == 'song'%}
+        <div id="results" align = center>
+            	<table class="table table-bordered table-condensed">
+                    <tr>
+                        <th>Artist</th>
+                        <th>Song</th>
+                        <th>Popularity</th>
+                        <th>Collection Date</th>      
+                    </tr>
+                    {% for object in object_list %}
+                    <tr>
+                        <td>{{object.artist}}</td>
+                        <td>{{object.song_name}}</td>
+                        <td>{{object.song_popularity}}</td>
+                        <td>{{object.collection_time}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+        </div>
+	<div id="plots" align=center>
+		<img src={{chart}} alt="Nope, Sorryyyyy">
+	</div>
+        {%endif%}
+    {%endif%}
+
+</div>
