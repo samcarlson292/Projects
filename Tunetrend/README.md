@@ -1,4 +1,6 @@
 # CS292-Final-Project
+Unfortunately, some of the packages required appear to be deprecated. Working on getting this project back into working order.
+
 Repo for the Big Data final project.
 
 This is a project to collect and analyze song data from the Spotify Catalog.
